@@ -1,18 +1,47 @@
-background no
-out_to_console yes
 out_to_x no
-max_text_width 0
 own_window no
-update_interval 0.5
-total_run_times 0
-short_units yes
-if_up_strictness address
-use_spacer right
-override_utf8_locale no
-cpu_avg_samples 2
-TEXT
-,[
-#Pacman
+out_to_console yes
+background no
+max_text_width 0
+
+update_interval 2.5
+
+ # This is the number of times Conky will update before quitting.
+ # Set to zero to run forever.
+ total_run_times 0
+
+ # Shortens units to a single character (kiB->k, GiB->G, etc.). Default is off.
+ short_units yes
+
+ # How strict should if_up be when testing an interface for being up?
+ # The value is one of up, link or address, to check for the interface
+ # being solely up, being up and having link or being up, having link
+ # and an assigned IP address. 
+ if_up_strictness address
+
+ # Add spaces to keep things from moving about?  This only affects certain objects.
+ # use_spacer should have an argument of left, right, or none
+ use_spacer none
+
+ # Force UTF8? note that UTF8 support required XFT
+ override_utf8_locale no
+
+ # number of cpu samples to average
+ # set to 1 to disable averaging
+ cpu_avg_samples 1
+times_in_seconds true
+ # Stuff after 'TEXT' will be formatted on screen
+ TEXT
+
+ # JSON for i3bar
+[
+#Wifi
+{"full_text":" ","color":"\#00FF00","separator":false,"separator_block_width":6},\
+{"full_text":"[${wireless_essid} :${downspeed wlp1s0}]","color":"\#808080","separator":false,"separator_block_width":6},\
+{"full_text":" ","color":"\#AEB404","separator":false,"separator_block_width":6},\
+{"full_text":"[${if_up tun0}Up${else}Down$endif]","color":"\#808080","separator":false,"separator_block_width":6},\
+{"full_text":"","color":"\#73C6B6","separator":false,"separator_block_width":6},\
+{"full_text":"[${fs_free /home}]","color":"\#808080","separator":false,"separator_block_width":6},\
 {"full_text":" ","color":"\#AEB404","separator":false,"separator_block_width":6},\
 {"full_text":"[${execi 200 checkupdates | wc -l}]","color":"\#808080","separator":false,"separator_block_width":6},\
 #AUR
@@ -21,32 +50,22 @@ TEXT
 #Kernel
 {"full_text":" ","color":"\#FF4000","separator":false,"separator_block_width":6},\
 {"full_text":"[${kernel}]","color":"\#808080","separator":false,"separator_block_width":6},\
-#{ "full_text": ": ${kernel}","color":"\#FF4000"},
-#Wifi
-#{"full_text":" ","color":"\#00FF00","separator":false,"separator_block_width":6},\
-#{"full_text":"[${upspeed wlp2s0}]","color":"\#808080","separator":false,"separator_block_width":6},\
-#{"full_text": ": [${upspeed wlp2s0}] ", "color":"\#00FF00", "separator": false, "separator_block_width":6},\
-
-#Finds current volume. May need modified depending on your setup
-{"full_text":" ","color":"\#268BD2","separator":false,"separator_block_width":6},\
-{"full_text":"${exec amixer -c 0 get Master | grep Mono: | cut -d " " -f6} ","color":"\#808080","separator":false,"separator_block_width":6},\
-#{"full_text": ": ${exec amixer -c 0 get Master | grep Mono: | cut -d " " -f6} ", "color":"\#268BD2"},
+{"full_text":"${if_match "${exec amixer get Master -M | grep -o "off" | head -1}"=="off"}${else}${endif}${if_match "${exec pactl list sinks | awk '/Активный порт:/' | grep -o 'headphones'}"=="headphones"} ${endif}","color":"\#268BD2","separator":false,"separator_block_width":6},\
+{"full_text":"[${exec amixer get Master -M | grep -oE "[[:digit:]]*%" | head -1}]","color":"\#808080","separator":false,"separator_block_width":6},\
 #Brighness
 {"full_text":" ","color":"\#F7FE2E","separator":false,"separator_block_width":6},\
 {"full_text":"[${exec xbacklight| awk '{printf("%d\n",$1 + 0.5)}'}%] ","color":"\#808080","separator":false,"separator_block_width":6},\
-#{ "full_text": ": ${exec xbacklight| awk '{printf("%d\n",$1 + 0.5)}'}% ", "color":"\#F7FE2E"},
 #CPU
-#{"full_text":" ","color":"\#8D00FF","separator":false,"separator_block_width":6},\
-#{"full_text":"[$cpu%]","color":"\#808080","separator":false,"separator_block_width":6},\
-#{"full_text": " :[$cpu%] ", "color":"\#8D00FF", "separator": false, "separator_block_width":6},\
-#Battery 
+{"full_text":"","color":"\#8D00FF","separator":false,"separator_block_width":6},\
+{"full_text":"[$cpu%]","color":"\#808080","separator":false,"separator_block_width":6},\
+{"full_text":" ","color":"\#8D00FF","separator":false,"separator_block_width":6},\
+{"full_text":"[$memperc%]","color":"\#808080","separator":false,"separator_block_width":6},\
 {"full_text":" ","color":"\#FF0000","separator":false,"separator_block_width":6},\
-{"full_text":"[${battery_percent BAT1}%]","color":"\#808080","separator":false,"separator_block_width":6},\
-#{"full_text": ":[${battery_percent BAT1}%] ","color":"\#dedede"},
-#Calender/time
+{"full_text":"[${battery_short BAT1} $font${format_time ${battery_time BAT1} "\hh \mm"}]","color":"\#808080","separator":false,"separator_block_width":6},\
 {"full_text":" ","color":"\#2E9AFE","separator":false,"separator_block_width":6},\
 {"full_text":"${time %a %b %d}","color":"\#808080","separator":false},\
-#{"full_text": " :${time %a %d %b} ${time %H:%M:%S} ","color": "\#2E9AFE", "separator": false},
-{"full_text":" ","color":"\#0404B4","separator":false,"separator_block_width":6},\
-{"full_text":"${time %H:%M:%S} ","color":"\#808080","separator":false}
-]
+{"full_text":"","color":"\#2E9AFE","separator":false,"separator_block_width":6},\
+{"full_text":"${time %H:%M}","color":"\#808080","separator":false},\
+{"full_text":"","color":"\#73C6B6","separator":false,"separator_block_width":6},\
+{"full_text":"[${exec xkb-switch}]","color":"\#808080","separator":false,"separator_block_width":6}
+],

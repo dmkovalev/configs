@@ -21,7 +21,7 @@ Plugin 'oblitum/rainbow'
 " }}}
 " Completion and snippets {{{
 Plugin 'dansomething/vim-eclim'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'Raimondi/delimitMate'
