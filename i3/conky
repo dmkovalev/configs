@@ -36,8 +36,6 @@ times_in_seconds true
  # JSON for i3bar
 [
 #Wifi
-{"full_text":" ","color":"\#00FF00","separator":false,"separator_block_width":6},\
-{"full_text":"[${wireless_essid} :${downspeed wlp1s0}]","color":"\#808080","separator":false,"separator_block_width":6},\
 {"full_text":" ","color":"\#AEB404","separator":false,"separator_block_width":6},\
 {"full_text":"[${if_up tun0}Up${else}Down$endif]","color":"\#808080","separator":false,"separator_block_width":6},\
 {"full_text":"","color":"\#73C6B6","separator":false,"separator_block_width":6},\
@@ -53,15 +51,10 @@ times_in_seconds true
 {"full_text":"${if_match "${exec amixer get Master -M | grep -o "off" | head -1}"=="off"}${else}${endif}${if_match "${exec pactl list sinks | awk '/Активный порт:/' | grep -o 'headphones'}"=="headphones"} ${endif}","color":"\#268BD2","separator":false,"separator_block_width":6},\
 {"full_text":"[${exec amixer get Master -M | grep -oE "[[:digit:]]*%" | head -1}]","color":"\#808080","separator":false,"separator_block_width":6},\
 #Brighness
-{"full_text":" ","color":"\#F7FE2E","separator":false,"separator_block_width":6},\
-{"full_text":"[${exec xbacklight| awk '{printf("%d\n",$1 + 0.5)}'}%] ","color":"\#808080","separator":false,"separator_block_width":6},\
-#CPU
 {"full_text":"","color":"\#8D00FF","separator":false,"separator_block_width":6},\
 {"full_text":"[$cpu%]","color":"\#808080","separator":false,"separator_block_width":6},\
 {"full_text":" ","color":"\#8D00FF","separator":false,"separator_block_width":6},\
 {"full_text":"[$memperc%]","color":"\#808080","separator":false,"separator_block_width":6},\
-{"full_text":" ","color":"\#FF0000","separator":false,"separator_block_width":6},\
-{"full_text":"[${battery_short BAT1} $font${format_time ${battery_time BAT1} "\hh \mm"}]","color":"\#808080","separator":false,"separator_block_width":6},\
 {"full_text":" ","color":"\#2E9AFE","separator":false,"separator_block_width":6},\
 {"full_text":"${time %a %b %d}","color":"\#808080","separator":false},\
 {"full_text":"","color":"\#2E9AFE","separator":false,"separator_block_width":6},\

@@ -10,18 +10,15 @@
 set $mod Mod1
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-# font pango:DejaVu Sans Mono 10
+font pango:DejaVu Sans Mono 10
 # Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
 # start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec --no-startup-id xfce4-terminal
-bindsym $mod+Return exec --no-startup-id urxvtc
 # kill focused window
 bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
@@ -98,23 +95,10 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 # Window border style: normal: border normal, with window title bar;
 # none: no border or window title bar; 1pixel: 1 pixel border.
-new_window none
 bindsym $mod+t border normal
 bindsym $mod+y border 1pixel
 bindsym $mod+u border none
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-bindsym l exec --no-startup-id i3exit lock, mode "default"
-bindsym e exec --no-startup-id i3exit logout, mode "default"
-bindsym s exec --no-startup-id i3exit suspend, mode "default"
-bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-bindsym r exec --no-startup-id i3exit reboot, mode "default"
-bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
-# back to normal: Enter or Escape
-bindsym Return mode "default"
-bindsym Escape mode "default"
-}
-bindsym $mod+F2 mode "$mode_system"
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -142,30 +126,10 @@ bindsym Return mode "default"
 bindsym Escape mode "default"
 }
 #volume control
-bindsym $mod+F11 exec amixer set Master 5%-
-bindsym $mod+F12 exec amixer set Master 5%+
 #Brightness control
-bindsym $mod+F4 exec xbacklight -dec 5
-bindsym $mod+F5 exec xbacklight -inc 5
 #Resize
 bindsym $mod+r mode "resize"
-: Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-#status_command i3status
 status_command /home/dmitry/.conkyi3
-#position top
-#tray_output none
-#mode hide
-font xft:Cousine, FontAwesome 10
-colors {
-background #00000
-statusline #2E9AFE
-separator #00000
-#Bord #Back #Text
-focused_workspace #2E9AFE #00000 #2E9AFE
-active_workspace #2d2d2d #5f676a #dedede
-inactive_workspace #00000 #00000 #0B0B61
-urgent_workspace #000000 #000000 #900000
-}
 }
