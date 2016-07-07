@@ -1,0 +1,32 @@
+#	$OpenBSD: sshd_config,v 1.98 2016/02/17 05:29:04 djm Exp $
+Port 55555
+
+Protocol 2
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+
+PermitRootLogin prohibit-password
+AllowGroups ssh-user
+LogLevel VERBOSE
+
+KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com
+
+AllowTcpForwarding yes
+X11Forwarding yes
+X11DisplayOffset 10
+X11UseLocalhost yes
+
+UsePrivilegeSeparation sandbox
+# IMPORTANT: you will have to ensure OpenSSH cannot authenticate with passwords with PAM in /etc/pam.d/sshd
+# # "PasswordAuthentication no" is not sufficient!
+#
+PubkeyAuthentication yes
+PasswordAuthentication no
+ChallengeResponseAuthentication yes
+UsePAM yes
+PrintMotd no # pam does that
+AuthenticationMethods publickey,keyboard-interactive:pam
+KbdInteractiveAuthentication yes
+UseLogin no
