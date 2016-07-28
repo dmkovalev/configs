@@ -1,11 +1,14 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/dmitry/.oh-my-zsh
+alias ssh-backuper='ssh -2 -p 55555 -XC -c chacha20-poly1305@openssh.com,aes256-gcm@openssh.com -i /mnt/usb/id_ed25519_backuper dmitry@backuper.dmkovalev.net'
+alias R='R --quiet'
+
+export ZSH=/home/dmitry/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="bullet-train"
+ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -82,3 +85,16 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+anacondactl() {
+    case $1 in
+            start) echo "$PATH" | grep -q "/opt/anaconda/bin:" || export PATH="/opt/anaconda/bin:":$PATH ;;
+                stop)  echo "$PATH" | grep -q "/opt/anaconda/bin:" && export PATH=${PATH/"\/opt\/anaconda\/bin:"/} ;;
+                    status) if [ $(echo $PATH | grep anaconda | wc -l) -gt 0 ] ; then echo "Anaconda python" ; else echo "Native python" ; fi ;;
+                        *) echo "Usage: anacondactl [start,stop,status]" ;;
+                        esac
+                    }
+export PATH="$HOME/neovim/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
