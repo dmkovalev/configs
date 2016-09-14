@@ -19,17 +19,21 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'zchee/deoplete-jedi'
 Plug 'ervandew/supertab'
 Plug 'airblade/vim-gitgutter'
+Plug 'easymotion/vim-easymotion'
 
 call plug#end()
 filetype plugin indent on    " required
 " Configuration variables {{{
-let g:python3_host_prog = '/home/dmitry/.pyenv/versions/anaconda3/bin/python'
+let g:python3_host_prog = '/home/dmitry/.pyenv/versions/nvim3/bin/python'
+let g:python_host_prog = '/home/dmitry/.pyenv/versions/anaconda2/bin/python'
 
 let g:airline#extensions#tabline#enabled = 1
 " disable caching
 let g:ctrlp_use_caching=0
 let g:deoplete#enable_at_startup = 1
 autocmd! BufWritePost,BufEnter * Neomake
+" Disable mouse click to go to position
+set mouse-=a
 
 " White characters {{{
 set modelines=0
