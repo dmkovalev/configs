@@ -1,0 +1,5 @@
+mail.petrodc.ru, localhost, 192.168.1.7 {
+    proxy / rainloop:8888 {
+        transparent
+    }
+}
